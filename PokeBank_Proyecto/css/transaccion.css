@@ -1,0 +1,41 @@
+/* Estilos personalizados para la página de transacciones */
+body {
+    background-color: lightcyan;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table {
+    margin-bottom: 1rem;
+}
+
+.table th, .table td {
+    white-space: nowrap;
+}
+
+.btn {
+    font-size: 1.1rem;
+}
+
+a.btn-secondary {
+    display: inline-block;
+    width: auto;
+    padding: 0.5rem 1.5rem;
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .btn {
+        margin-bottom: 1rem;
+    }
+}

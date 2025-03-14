@@ -1,0 +1,35 @@
+/* Estilos personalizados */
+body {
+    background-color: lightcyan; /* Fondo claro para el cuerpo */
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.chart-container {
+    position: relative;
+    height: 50vh;
+    width: 100%;
+}
+
+.btn {
+    font-size: 1.1rem; /* Aumenta el tamaño de la fuente de los botones */
+}
+
+a.btn-secondary {
+    display: inline-block;
+    width: auto;
+    padding: 0.5rem 1.5rem;
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .btn {
+        margin-bottom: 1rem;
+    }
+}

@@ -1,0 +1,44 @@
+body
+{
+    background-color: lightcyan;
+}
+
+.contenido-formulario
+{
+    max-width: 400px;
+    width: 100%;
+}
+
+.card {
+    max-width: 800px;
+    margin: auto;
+}
+
+.card-header h4 {
+    margin-bottom: 0.5rem;
+}
+
+.card-header p {
+    margin-bottom: 0;
+    font-size: 1rem;
+}
+
+.btn {
+    font-size: 1.1rem; /* Aumenta el tamaño de la fuente de los botones */
+}
+
+a.btn-secondary {
+    display: inline-block;
+    width: auto;
+    padding: 0.5rem 1.5rem;
+}
+
+@media (max-width: 576px) {
+    .card {
+        padding: 1rem;
+    }
+
+    .btn {
+        margin-bottom: 1rem;
+    }
+}
