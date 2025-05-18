@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Menú - Pokémon Bank</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+  <h1>Bienvenido a Pokémon Bank</h1>
+  <div id="user-info"></div>
+
+  <button onclick="consultarSaldo()">Consultar Saldo</button>
+  <button onclick="mostrarTransaccion()">Retiro / Depósito</button>
+  <button onclick="salir()">Salir</button>
+
+  <script>
+    let usuario = JSON.parse(localStorage.getItem("usuario"));
+
+    if (!usuario) {
+      usuario = {
+        nombre: "Ash Ketchum",
+        pin: "1234",
+        cuenta: "0987654321",
+        saldo: 500.00
+      };
+      localStorage.setItem("usuario", JSON.stringify(usuario));
+    }
+
+    document.getElementById("user-info").innerHTML = `
+      <p>Nombre: ${usuario.nombre}</p>
+      <p>Cuenta: ${usuario.cuenta}</p>
+    `;
+
+    function consultarSaldo() {
+      Swal.fire(`Tu saldo actual es: $${usuario.saldo.toFixed(2)}`);
+    }
+
+    function mostrarTransaccion() {
+      Swal.fire({
+        title: "Tipo de transacción",
+        input: "select",
+        inputOptions: {
+          deposito: "Depósito",
+          retiro: "Retiro"
+        },
+        inputPlaceholder: "Selecciona una opción",
+        showCancelButton: true
+      }).then((result) => {
+        if (result.isConfirmed && result.value) {
+          let tipo = result.value;
+          Swal.fire({
+            title: `Monto a ${tipo}`,
+            input: "number",
+            inputAttributes: {
+              min: 1,
+              step: 0.01
+            },
+            inputPlaceholder: "Ingrese el monto",
+            showCancelButton: true
+          }).then((montoResult) => {
+            if (montoResult.isConfirmed) {
+              let monto = parseFloat(montoResult.value);
+              if (isNaN(monto) || monto <= 0) {
+                Swal.fire("Monto inválido");
+                return;
+              }
+
+              if (tipo === "retiro" && monto > usuario.saldo) {
+                Swal.fire("Saldo insuficiente");
+                return;
+              }
+
+              usuario.saldo += tipo === "deposito" ? monto : -monto;
+              localStorage.setItem("usuario", JSON.stringify(usuario));
+              Swal.fire(`Transacción exitosa. Saldo actual: $${usuario.saldo.toFixed(2)}`);
+            }
+          });
+        }
+      });
+    }
+
+    function salir() {
+      Swal.fire("¡Hasta pronto!", "Sesión finalizada", "info").then(() => {
+        window.location.href = "../index.html";
+      });
+    }
+  </script>
+</body>
+</html>
